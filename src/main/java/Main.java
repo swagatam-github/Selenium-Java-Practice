@@ -14,6 +14,6 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        driver.close();
+        driver.quit();
     }
 }

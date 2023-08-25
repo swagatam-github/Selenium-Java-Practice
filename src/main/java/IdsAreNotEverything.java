@@ -17,7 +17,7 @@ public class IdsAreNotEverything {
             System.out.println("Problem Solved");
         else
             System.out.println("Problem Not Solved");
-        driver.close();
+        driver.quit();
     }
 
 }
