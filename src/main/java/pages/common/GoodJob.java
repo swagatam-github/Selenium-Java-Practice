@@ -17,6 +17,11 @@ public class GoodJob extends PageFactory {
     }
 
     public boolean isSuccessMessageShowed() {
-        return successPopUp.isDisplayed();
+        try {
+            Thread.sleep(5000);
+            return successPopUp.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
