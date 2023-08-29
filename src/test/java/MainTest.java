@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.common.GoodJob;
 import pages.login.LoginPage;
+import pages.obstacles.AndCounting;
 import pages.obstacles.NotATable;
 import utils.Browser;
 import utils.Credentials;
@@ -28,6 +29,18 @@ public class MainTest {
         notATable.clickGenerateOrderId();
         String orderId = notATable.getOrderID();
         notATable.enterOrderId(orderId);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "And Counting")
+    void AndCounting() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/24499");
+        AndCounting andCounting = new AndCounting(driver);
+        String chars = andCounting.getTypeThisText();
+        long countOfOptions = andCounting.dropDown().getOptions()
+                .stream().filter(option -> option.getAttribute("innerText").startsWith(chars))
+                .count();
+        andCounting.enterCount(String.valueOf(countOfOptions));
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
