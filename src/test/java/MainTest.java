@@ -1,4 +1,7 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -10,6 +13,9 @@ import pages.obstacles.NotATable;
 import utils.Browser;
 import utils.Credentials;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static utils.BrowserWebDriver.openUrl;
 
 public class MainTest {
@@ -18,8 +24,8 @@ public class MainTest {
     @BeforeSuite
     void initObstaclePage() {
         driver = openUrl(Browser.CHROME, "https://obstaclecourse.tricentis.com/Account/Login");
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(Credentials.getUserName(), Credentials.getPassword());
+        //LoginPage loginPage = new LoginPage(driver);
+        //loginPage.login(Credentials.getUserName(), Credentials.getPassword());
     }
 
     @Test(testName = "Not a table")
@@ -41,6 +47,25 @@ public class MainTest {
                 .stream().filter(option -> option.getAttribute("innerText").startsWith(chars))
                 .count();
         andCounting.enterCount(String.valueOf(countOfOptions));
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Todo List")
+    void Todolist() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/23292");
+        List<WebElement> todoTable = driver.findElements(By.xpath("//table[@id='todo-tasks']//tr"))
+                .stream().filter(row -> row.getAttribute("task") != null)
+                .collect(Collectors.toList());
+        WebElement completedTasksTable = driver.findElement(By.id("completed-tasks"));
+        Actions actions = new Actions(driver);
+        for (int i = 1; i <= todoTable.size(); i++) {
+            int finalI = i;
+            actions.dragAndDrop(
+                            todoTable.stream()
+                                    .filter(row -> Integer.parseInt(row.getAttribute("task")) == finalI)
+                                    .findFirst().get(), completedTasksTable)
+                    .perform();
+        }
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
