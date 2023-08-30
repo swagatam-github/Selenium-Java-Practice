@@ -7,25 +7,21 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.common.GoodJob;
-import pages.login.LoginPage;
 import pages.obstacles.AndCounting;
 import pages.obstacles.NotATable;
 import utils.Browser;
-import utils.Credentials;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static utils.BrowserWebDriver.openUrl;
 
-public class MainTest {
+public class ShawnFrost {
     WebDriver driver;
 
     @BeforeSuite
     void initObstaclePage() {
         driver = openUrl(Browser.CHROME, "https://obstaclecourse.tricentis.com/Account/Login");
-        //LoginPage loginPage = new LoginPage(driver);
-        //loginPage.login(Credentials.getUserName(), Credentials.getPassword());
     }
 
     @Test(testName = "Not a table")
