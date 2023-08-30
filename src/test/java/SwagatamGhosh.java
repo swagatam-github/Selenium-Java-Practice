@@ -1,6 +1,8 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -35,7 +37,7 @@ public class SwagatamGhosh {
     }
 
     @Test(testName = "The Obvious")
-    void TheObvious(){
+    void TheObvious() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/73588");
         driver.findElement(By.xpath("//a[text()='Generate Random Text']")).click();
         String randomText = driver.findElement(By.id("randomtext")).getAttribute("value");
@@ -44,6 +46,32 @@ public class SwagatamGhosh {
         driver.findElement(By.id("submitanswer")).click();
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
+
+    @Test(testName = "Scroll Into View")
+    void ScrollIntoView() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/99999");
+        WebElement container = driver.findElement(By.id("container"));
+        container.sendKeys(Keys.END);
+        driver.switchTo().frame("container");
+        driver.findElement(By.id("textfield")).sendKeys("Tosca");
+        driver.switchTo().defaultContent();
+        driver.findElement(By.id("submit")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Bubble Sort")
+    void BubbleSort() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/73589");
+
+
+    }
+
+    @Test(testName = "Halfway")
+    void Hafway() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41038");
+        WebElement clickButton = driver.findElement(By.id("halfButton"));
+    }
+
 
     @AfterSuite
     void tearDownSession() {
