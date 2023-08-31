@@ -22,7 +22,7 @@ public class SwagatamGhosh {
 
     @BeforeSuite
     void initObstaclePage() {
-        driver = openUrl(Browser.FIREFOX, "https://obstaclecourse.tricentis.com/Account/Login");
+        driver = openUrl(Browser.CHROME, "https://obstaclecourse.tricentis.com/Account/Login");
     }
 
     @Test(testName = "The Last Row")
@@ -63,15 +63,48 @@ public class SwagatamGhosh {
     void BubbleSort() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/73589");
 
-
     }
 
     @Test(testName = "Halfway")
     void Hafway() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/41038");
         WebElement clickButton = driver.findElement(By.id("halfButton"));
+
     }
 
+    @Test(testName = "Meeting Scheduler")
+    void MeetingScheduler() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41037");
+        WebElement scheduleTable = driver.findElement(By.id("timeTable"));
+
+    }
+
+    @Test(testName = "Fun With Tables")
+    void FunWithTables() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/92248");
+        WebElement dataTable = driver.findElement(By.id("persons"));
+
+    }
+
+    @Test(testName = "Toscabot Can Fly")
+    void ToscabotCanFly() throws InterruptedException {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/60469");
+        WebElement toscaBot = driver.findElement(By.id("toscabot"));
+        WebElement toscaBotTo = driver.findElement(By.id("to"));
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(toscaBot, toscaBotTo).perform();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Addition")
+    void Addition() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/78264");
+        String random1 = driver.findElement(By.id("no1")).getText();
+        String random2 = driver.findElement(By.id("no2")).getText();
+        int result = Integer.parseInt(random1) + Integer.parseInt(random2);
+        driver.findElement(By.id("result")).sendKeys(String.valueOf(result));
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
 
     @AfterSuite
     void tearDownSession() {
