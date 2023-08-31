@@ -69,7 +69,9 @@ public class SwagatamGhosh {
     void Hafway() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/41038");
         WebElement clickButton = driver.findElement(By.id("halfButton"));
-
+        Actions actions=new Actions(driver);
+        actions.moveToElement(clickButton, 0, 100).click().perform();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
     @Test(testName = "Meeting Scheduler")
