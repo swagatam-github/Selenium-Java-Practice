@@ -1,6 +1,6 @@
 # Selenium-Java-Practice
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[//]: # ([![License]&#40;https://img.shields.io/badge/License-MIT-blue.svg&#41;]&#40;LICENSE&#41;)
 
 This repository contains Selenium scripts for automating challenges on the [Obstacle Challenge Website](https://obstaclecourse.tricentis.com/).
 
@@ -16,13 +16,13 @@ This repository contains Selenium scripts for automating challenges on the [Obst
 
 ## Introduction
 
-The [Obstacle Challenge Website](https://obstaclecourse.tricentis.com/) provides a platform for practicing web automation challenges. This repository contains Selenium scripts written in [Java](https://www.java.com/en/) to automate these challenges.
+The [Obstacle Challenge Website](https://obstaclecourse.tricentis.com/) provides a platform for practicing web automation challenges. This repository contains Selenium scripts written in Java to automate these challenges.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Latest [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows) Version 8 installed on your system.
+- Java installed on your system. Preferred the Latest [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows) Version 8.
 - [Selenium WebDriver](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/) set up.
 
 ### Installation
@@ -50,5 +50,3 @@ The [Obstacle Challenge Website](https://obstaclecourse.tricentis.com/) provides
 Contributions are welcome! If you have improvements or additional scripts to share, please open an issue or pull request.
 
 ## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
