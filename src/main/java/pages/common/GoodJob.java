@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static utils.ElementOperations.staticWait;
+
 public class GoodJob extends PageFactory {
     WebDriver driver;
 
@@ -18,7 +20,7 @@ public class GoodJob extends PageFactory {
 
     public boolean isSuccessMessageShowed() {
         try {
-            Thread.sleep(5000);
+            staticWait(5);
             return successPopUp.isDisplayed();
         } catch (Exception e) {
             return false;
