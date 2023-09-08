@@ -10,6 +10,7 @@ import pages.common.GoodJob;
 import pages.obstacles.AndCounting;
 import pages.obstacles.NotATable;
 import utils.Browser;
+import utils.XMLParser;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -84,6 +85,18 @@ public class ShawnFrost {
                 .getDayOfWeek()
                 .getDisplayName(TextStyle.FULL, Locale.ENGLISH);
         driver.findElement(By.id("christmasday")).sendKeys(dayName);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Be Fast - Automate")
+    void BeFastAutomate() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/87912");
+        driver.findElement(By.id("loadbooks")).click();
+        String xmlString = driver.findElement(By.id("books")).getAttribute("value");
+        String isbn = new XMLParser()
+                .fromXMLString(xmlString)
+                .getStringValueByXPath("//title[text()='Testing Computer Software']/following-sibling::isbn");
+        driver.findElement(By.id("isbn")).sendKeys(isbn);
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
