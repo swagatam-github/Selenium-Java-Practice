@@ -11,7 +11,10 @@ import pages.obstacles.AndCounting;
 import pages.obstacles.NotATable;
 import utils.Browser;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static utils.BrowserWebDriver.openUrl;
@@ -62,6 +65,23 @@ public class ShawnFrost {
                                     .findFirst().get(), completedTasksTable)
                     .perform();
         }
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Red Stripe")
+    void RedStripe() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/30034");
+        driver.findElement(By.id("generate")).click();
+        driver.findElement(By.xpath("//div[@id='number']//following-sibling::div")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Future Christmas")
+    void FutureChristmas() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/21269");
+        LocalDate date = LocalDate.of(LocalDate.now().getYear(), 12, 25).plusYears(2);
+        String dayName = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        driver.findElement(By.id("christmasday")).sendKeys(dayName);
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
