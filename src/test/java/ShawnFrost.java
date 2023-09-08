@@ -79,8 +79,10 @@ public class ShawnFrost {
     @Test(testName = "Future Christmas")
     void FutureChristmas() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/21269");
-        LocalDate date = LocalDate.of(LocalDate.now().getYear(), 12, 25).plusYears(2);
-        String dayName = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        String dayName = LocalDate.of(LocalDate.now().getYear(), 12, 25)
+                .plusYears(2)
+                .getDayOfWeek()
+                .getDisplayName(TextStyle.FULL, Locale.ENGLISH);
         driver.findElement(By.id("christmasday")).sendKeys(dayName);
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
