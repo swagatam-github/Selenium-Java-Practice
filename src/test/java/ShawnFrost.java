@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -97,6 +95,26 @@ public class ShawnFrost {
                 .fromXMLString(xmlString)
                 .getStringValueByXPath("//title[text()='Testing Computer Software']/following-sibling::isbn");
         driver.findElement(By.id("isbn")).sendKeys(isbn);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Tricentis Tosca Olympics")
+    void TricentisToscaOlympics(){
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/82018");
+        driver.findElement(By.id("start")).click();
+        WebElement instructions = driver.findElement(By.className("instructions"));
+        String winMessage = "You did it!";
+        while (!instructions.getText().trim().equals(winMessage)) {
+            String op = instructions.getText().trim();
+            switch(op) {
+                case "Go right!":
+                    new Actions(driver).sendKeys(Keys.ARROW_RIGHT).perform();
+                    break;
+                case "Go left!":
+                    new Actions(driver).sendKeys(Keys.ARROW_LEFT).perform();
+                    break;
+            }
+        }
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
