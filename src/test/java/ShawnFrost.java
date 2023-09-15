@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.common.GoodJob;
 import pages.obstacles.AndCounting;
+import pages.obstacles.FindTheChangedCell;
 import pages.obstacles.NotATable;
 import utils.Browser;
 import utils.XMLParser;
@@ -115,6 +116,32 @@ public class ShawnFrost {
                     break;
             }
         }
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Find The Changed Cell")
+    void FindTheChangedCell() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/73591");
+        FindTheChangedCell findTheChangedCell = new FindTheChangedCell(driver);
+
+        List<List<String>> originalTable = findTheChangedCell.getTableData();
+        findTheChangedCell.clickChangeTableButton();
+        List<List<String>> changedTable = findTheChangedCell.getTableData();
+
+        for (int i = 0; i < originalTable.size(); i++) {
+            for (int j = 0; j < originalTable.size(); j++) {
+                String originalStr = originalTable.get(i).get(j);
+                String changedStr = changedTable.get(i).get(j);
+                if (!originalStr.equals(changedStr)) {
+                    findTheChangedCell.enterRowNumber(i + 1);
+                    findTheChangedCell.enterColumnNumber(j + 1);
+                    findTheChangedCell.enterOriginalValue(originalStr);
+                    findTheChangedCell.enterChangedValue(changedStr);
+                }
+            }
+        }
+
+        findTheChangedCell.clickSubmit();
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
