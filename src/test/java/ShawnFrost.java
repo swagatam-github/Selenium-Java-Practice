@@ -18,6 +18,8 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static utils.BrowserWebDriver.openUrl;
+import static utils.ElementOperations.clickElementByOffSet;
+import static utils.ElementOperations.staticWait;
 
 public class ShawnFrost {
     WebDriver driver;
@@ -142,6 +144,14 @@ public class ShawnFrost {
         }
 
         findTheChangedCell.clickSubmit();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Halfway")
+    void Halfway() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41038");
+        WebElement halfButton = driver.findElement(By.id("halfButton"));
+        clickElementByOffSet(driver, halfButton, 75, 50);
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
