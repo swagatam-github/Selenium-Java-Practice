@@ -229,6 +229,17 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Empty")
+    void Empty() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/66667");
+        driver.findElement(By.id("generate")).click();
+        List<WebElement> checkpoints = driver.findElements(By.className("checkpoint"));
+        for (WebElement checkpoint : checkpoints) {
+            checkpoint.click();
+        }
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
