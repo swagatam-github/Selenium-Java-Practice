@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +34,16 @@ public class ElementOperations {
         Matcher matcher = pattern.matcher(text);
         matcher.find();
         return matcher;
+    }
+
+    public static List<String> regexMultiTextExtractor(String text, String regex) {
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(text);
+        List<String> arr = new ArrayList<>();
+        while (matcher.find()) {
+            arr.add(matcher.group());
+        }
+        return arr;
     }
 
     public static void scrollByAmount(WebDriver driver, int dX, int dY) {
