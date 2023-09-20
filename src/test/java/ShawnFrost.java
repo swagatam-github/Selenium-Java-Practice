@@ -19,8 +19,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static utils.BrowserWebDriver.openUrl;
-import static utils.ElementOperations.clickElementByOffSet;
-import static utils.ElementOperations.staticWait;
+import static utils.ElementOperations.*;
 
 public class ShawnFrost {
     WebDriver driver;
@@ -188,6 +187,16 @@ public class ShawnFrost {
                 break;
         }
         driver.findElement(By.id("result")).sendKeys(String.valueOf(result));
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Extracting Text")
+    void ExtractingText() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/81012");
+        String successMessage = driver.findElement(By.id("alerttext")).getText().trim();
+        String amount = regexExtractor(successMessage, "\\$(?<Amount>\\d+\\.\\d+)")
+                .group("Amount");
+        driver.findElement(By.id("totalamountText")).sendKeys(amount);
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
