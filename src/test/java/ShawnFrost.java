@@ -200,6 +200,19 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Tough Cookie")
+    void ToughCookie() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/45618");
+        WebElement txtBox = driver.findElement(By.id("generated"));
+        txtBox.click();
+        String randomText = txtBox.getAttribute("value").trim();
+        List<String> numbers = regexMultiTextExtractor(randomText, "\\d+");
+        driver.findElement(By.id("firstNumber")).sendKeys(numbers.get(0));
+        driver.findElement(By.id("secondNumber")).sendKeys(numbers.get(1));
+        driver.findElement(By.id("thirdNumber")).sendKeys(numbers.get(2));
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
