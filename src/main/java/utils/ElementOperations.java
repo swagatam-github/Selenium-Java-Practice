@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.function.BiFunction;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ElementOperations {
     public static void staticWait(long timeInSeconds) {
@@ -23,6 +25,13 @@ public class ElementOperations {
         int heightOffset = calculateOffset.apply(element.getRect().getDimension().getHeight(), heightOffsetPercent);
 
         new Actions(driver).moveToElement(element, widthOffset, heightOffset).click().perform();
+    }
+
+    public static Matcher regexExtractor(String text, String regex) {
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(text);
+        matcher.find();
+        return matcher;
     }
 
     public static void scrollByAmount(WebDriver driver, int dX, int dY) {
