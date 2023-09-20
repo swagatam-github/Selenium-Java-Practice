@@ -166,6 +166,31 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Math")
+    void Math() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/32403");
+        int number1 = Integer.parseInt(driver.findElement(By.id("no1")).getText().trim());
+        int number2 = Integer.parseInt(driver.findElement(By.id("no2")).getText().trim());
+        int result = 0;
+        String operator = driver.findElement(By.id("symbol1")).getText().trim();
+        switch (operator) {
+            case "+":
+                result = number1 + number2;
+                break;
+            case "%":
+                result = number1 % number2;
+                break;
+            case "*":
+                result = number1 * number2;
+                break;
+            case "-":
+                result = number1 - number2;
+                break;
+        }
+        driver.findElement(By.id("result")).sendKeys(String.valueOf(result));
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
