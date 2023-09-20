@@ -213,6 +213,22 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Hidden Element")
+    void HiddenElement() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/66666");
+        driver.findElement(By.id("clickthis")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Addition")
+    void Addition() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/78264");
+        int number1 = Integer.parseInt(driver.findElement(By.id("no1")).getText().trim());
+        int number2 = Integer.parseInt(driver.findElement(By.id("no2")).getText().trim());
+        driver.findElement(By.id("result")).sendKeys(String.valueOf(number1 + number2));
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
