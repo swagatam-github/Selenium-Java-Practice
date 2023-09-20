@@ -12,6 +12,7 @@ import utils.Browser;
 import utils.XMLParser;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
@@ -152,6 +153,16 @@ public class ShawnFrost {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/41038");
         WebElement halfButton = driver.findElement(By.id("halfButton"));
         clickElementByOffSet(driver, halfButton, 75, 50);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Tomorrow")
+    void Tomorrow() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/19875");
+        String tomorrowsDate = LocalDate.now()
+                .plusDays(1)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        driver.findElement(By.id("datefield")).sendKeys(tomorrowsDate);
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
