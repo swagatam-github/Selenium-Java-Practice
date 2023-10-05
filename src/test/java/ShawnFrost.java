@@ -287,6 +287,25 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "DropDown Table")
+    void DropDownTable() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/14090");
+        driver.findElement(By.id("generate")).click();
+        List<WebElement> tasks = driver.findElements(By.className("task"));
+        tasks.remove(0);
+        List<WebElement> values = driver.findElements(By.xpath("//select[@class='tableselect value']"));
+        for (int i = 0; i < tasks.size(); i++) {
+            String firstLetter = tasks.get(i).getText().split(":")[1].trim();
+            Select select = new Select(values.get(i));
+            select.getOptions().stream()
+                    .filter(element -> element.getText().startsWith(firstLetter))
+                    .findFirst()
+                    .ifPresent(option -> select.selectByVisibleText(option.getText()));
+        }
+        driver.findElement(By.id("submit")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
