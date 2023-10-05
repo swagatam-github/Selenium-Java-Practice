@@ -1,5 +1,6 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -271,6 +272,19 @@ public class ShawnFrost {
         } finally {
             Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
         }
+    }
+
+    @Test(testName = "Testing Methods")
+    void TestingMethods() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/94441");
+        String[] testingTypes = {
+                "Functional", "End2End", "GUI", "Exploratory"
+        };
+        Select multiSelect = new Select(driver.findElement(By.id("multiselect")));
+        for (String testingType : testingTypes) {
+            multiSelect.selectByVisibleText(testingType.concat(" testing"));
+        }
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
     @AfterSuite
