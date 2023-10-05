@@ -8,6 +8,7 @@ import pages.common.GoodJob;
 import pages.obstacles.AndCounting;
 import pages.obstacles.FindTheChangedCell;
 import pages.obstacles.NotATable;
+import pages.obstacles.ToscaBotCanFly;
 import utils.Browser;
 import utils.XMLParser;
 
@@ -237,6 +238,16 @@ public class ShawnFrost {
         for (WebElement checkpoint : checkpoints) {
             checkpoint.click();
         }
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "ToscaBot Can Fly")
+    void ToscaBotCanFly() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/60469");
+        ToscaBotCanFly toscaBotCanFly = new ToscaBotCanFly(driver);
+        new Actions(driver)
+                .dragAndDrop(toscaBotCanFly.getToscaBot(), toscaBotCanFly.getTargetLocation())
+                .perform();
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
