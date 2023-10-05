@@ -251,6 +251,28 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Bubble Sort")
+    void BubbleSort() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/73589");
+        String xpath = "(//div[@id='array']/div[@class='bubble']/div[@class='num'])[%d]";
+        try {
+            for (int i = 1; i <= 9; i++) {
+                for (int j = 1; j <= 9; j++) {
+                    staticWait(1);
+                    int number1 = Integer.parseInt(driver.findElement(By.xpath(String.format(xpath, 1))).getText());
+                    int number2 = Integer.parseInt(driver.findElement(By.xpath(String.format(xpath, 2))).getText());
+                    if (number1 > number2) {
+                        driver.findElement(By.id("button1")).click();
+                    }
+                    driver.findElement(By.id("button2")).click();
+                }
+            }
+        } catch (Exception ignored) {
+        } finally {
+            Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+        }
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
