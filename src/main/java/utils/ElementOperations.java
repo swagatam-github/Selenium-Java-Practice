@@ -50,4 +50,9 @@ public class ElementOperations {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(" + dX + ", " + dY + ");");
     }
+
+    public static void triggerClick(WebDriver driver, WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].click();", element);
+    }
 }
