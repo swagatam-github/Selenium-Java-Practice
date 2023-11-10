@@ -306,6 +306,14 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Click Me If You Can")
+    void ClickMeIfYouCan() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41040");
+        WebElement button = driver.findElement(By.id("buttontoclick"));
+        triggerClick(driver, button);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         driver.quit();
