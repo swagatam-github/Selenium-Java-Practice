@@ -16,8 +16,11 @@ import utils.XMLParser;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 import static utils.BrowserWebDriver.openUrl;
@@ -169,25 +172,17 @@ public class ShawnFrost {
 
     @Test(testName = "Math")
     void Math() {
+        Map<String, BinaryOperator<Integer>> operatorMap = new HashMap<>();
+        operatorMap.put("+", Integer::sum);
+        operatorMap.put("-", (a, b) -> a - b);
+        operatorMap.put("*", (a, b) -> a * b);
+        operatorMap.put("%", (a, b) -> a % b);
+
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/32403");
         int number1 = Integer.parseInt(driver.findElement(By.id("no1")).getText().trim());
         int number2 = Integer.parseInt(driver.findElement(By.id("no2")).getText().trim());
-        int result = 0;
         String operator = driver.findElement(By.id("symbol1")).getText().trim();
-        switch (operator) {
-            case "+":
-                result = number1 + number2;
-                break;
-            case "%":
-                result = number1 % number2;
-                break;
-            case "*":
-                result = number1 * number2;
-                break;
-            case "-":
-                result = number1 - number2;
-                break;
-        }
+        int result = operatorMap.get(operator).apply(number1, number2);
         driver.findElement(By.id("result")).sendKeys(String.valueOf(result));
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
