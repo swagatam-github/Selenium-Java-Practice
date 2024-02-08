@@ -107,14 +107,16 @@ public class ShawnFrost {
     }
 
     @Test(testName = "Tricentis Tosca Olympics")
-    void TricentisToscaOlympics(){
+    void TricentisToscaOlympics() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/82018");
-        driver.findElement(By.id("start")).click();
+        WebElement startButton = driver.findElement(By.id("start"));
+        startButton.click();
         WebElement instructions = driver.findElement(By.className("instructions"));
         String winMessage = "You did it!";
+        String crashMessage = "Crash!";
         while (!instructions.getText().trim().equals(winMessage)) {
             String op = instructions.getText().trim();
-            switch(op) {
+            switch (op) {
                 case "Go right!":
                     new Actions(driver).sendKeys(Keys.ARROW_RIGHT).perform();
                     break;
@@ -122,6 +124,7 @@ public class ShawnFrost {
                     new Actions(driver).sendKeys(Keys.ARROW_LEFT).perform();
                     break;
             }
+            if (op.equals(crashMessage)) startButton.click();
         }
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
