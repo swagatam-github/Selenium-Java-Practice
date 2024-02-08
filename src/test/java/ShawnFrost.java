@@ -210,6 +210,7 @@ public class ShawnFrost {
         driver.findElement(By.id("firstNumber")).sendKeys(numbers.get(0));
         driver.findElement(By.id("secondNumber")).sendKeys(numbers.get(1));
         driver.findElement(By.id("thirdNumber")).sendKeys(numbers.get(2));
+        txtBox.click();
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
