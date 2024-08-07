@@ -1,4 +1,8 @@
-import org.openqa.selenium.*;
+import io.restassured.response.Response;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -23,6 +27,7 @@ import java.util.Map;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
+import static io.restassured.RestAssured.given;
 import static utils.BrowserWebDriver.openUrl;
 import static utils.ElementOperations.*;
 
@@ -310,6 +315,39 @@ public class ShawnFrost {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/41040");
         WebElement button = driver.findElement(By.id("buttontoclick"));
         triggerClick(driver, button);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "TestData In A Service")
+    void TestDataInAService() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/16384");
+        WebElement createDataButton = driver.findElement(By.id("createTDS"));
+        createDataButton.click();
+        WebElement keyTextBox = driver.findElement(By.id("key"));
+        WebElement attributeTextBox = driver.findElement(By.id("attribute"));
+        String key = keyTextBox.getText().trim();
+        String attribute = attributeTextBox.getText().trim();
+
+        // Steps to get the value from TDS (Tricentis Test Data Service)
+        String tdsUri = "https://tdsservice.azurewebsites.net";
+        String repository = "data";
+        String tdsType = "obstacle";
+
+        Response response = given()
+                .baseUri(tdsUri)
+                .get(repository + "/" + tdsType);
+
+        List<Map<String, Object>> data = response.body().jsonPath().getList("$");
+        Map<String, Object> r = data.stream()
+                .filter(e -> ((Map<String, Object>) e.get("data")).get("key").equals(key))
+                .findFirst()
+                .orElse(null);
+        String result = ((Map<String, Object>) r.get("data")).get(attribute).toString();
+
+        WebElement resultTextBox = driver.findElement(By.id("result"));
+        resultTextBox.sendKeys(result);
+        WebElement submitButton = driver.findElement(By.id("submit"));
+        submitButton.click();
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
