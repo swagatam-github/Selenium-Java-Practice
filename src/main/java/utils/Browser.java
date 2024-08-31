@@ -8,21 +8,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.time.Duration;
 
 public class Browser {
+    public WebDriver openBrowser(String browserName) {
+        browserName = browserName.toLowerCase();
 
-    public enum Browsers {
-        CHROME, EDGE, FIREFOX
-    }
-
-    public WebDriver openBrowser(Browsers browserName) {
         WebDriver driver;
         switch (browserName) {
-            case CHROME:
+            case "chrome":
                 driver = new ChromeDriver();
                 break;
-            case FIREFOX:
+            case "firefox":
                 driver = new FirefoxDriver();
                 break;
-            case EDGE:
+            case "edge":
             default:
                 driver = new EdgeDriver();
         }
