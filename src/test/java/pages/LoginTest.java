@@ -8,14 +8,12 @@ import pages.login.LoginPage;
 import utils.Browser;
 import utils.Credentials;
 
-import static utils.BrowserWebDriver.openUrl;
-
 public class LoginTest {
     WebDriver driver;
 
     @BeforeSuite
     void initDriver() {
-        driver = openUrl(Browser.CHROME, "https://obstaclecourse.tricentis.com/Account/Login");
+        driver = new Browser().openBrowser(Browser.Browsers.EDGE);
     }
 
     @Test
