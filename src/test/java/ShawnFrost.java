@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.common.GoodJob;
 import pages.obstacles.AndCounting;
 import pages.obstacles.FindTheChangedCell;
@@ -28,7 +26,6 @@ import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
-import static utils.BrowserWebDriver.openUrl;
 import static utils.ElementOperations.*;
 
 public class ShawnFrost {
@@ -36,7 +33,7 @@ public class ShawnFrost {
 
     @BeforeSuite
     void initObstaclePage() {
-        driver = openUrl(Browser.CHROME, "https://obstaclecourse.tricentis.com/Account/Login");
+        driver = new Browser().openBrowser("edge");
     }
 
     @Test(testName = "Not a table")

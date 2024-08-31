@@ -2,7 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -13,16 +12,13 @@ import pages.common.GoodJob;
 import utils.Browser;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static utils.BrowserWebDriver.openUrl;
 
 public class SwagatamGhosh {
     WebDriver driver;
 
     @BeforeSuite
     void initObstaclePage() {
-        driver = openUrl(Browser.CHROME, "https://obstaclecourse.tricentis.com/Account/Login");
+        driver = new Browser().openBrowser("edge");
     }
 
     @Test(testName = "The Last Row")
@@ -69,7 +65,7 @@ public class SwagatamGhosh {
     void Hafway() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/41038");
         WebElement clickButton = driver.findElement(By.id("halfButton"));
-        Actions actions=new Actions(driver);
+        Actions actions = new Actions(driver);
         actions.moveToElement(clickButton, 0, 100).click().perform();
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
@@ -113,4 +109,3 @@ public class SwagatamGhosh {
         driver.quit();
     }
 }
-
