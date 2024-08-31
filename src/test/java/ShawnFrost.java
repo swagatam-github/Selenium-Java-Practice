@@ -33,7 +33,7 @@ public class ShawnFrost {
 
     @BeforeSuite
     void initObstaclePage() {
-        driver = new Browser().openBrowser(Browser.Browsers.EDGE);
+        driver = new Browser().openBrowser("edge");
     }
 
     @Test(testName = "Not a table")

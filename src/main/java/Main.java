@@ -3,7 +3,7 @@ import utils.Browser;
 
 public class Main {
     public static void main(String[] args) {
-        WebDriver driver = new Browser().openBrowser(Browser.Browsers.EDGE);
+        WebDriver driver = new Browser().openBrowser("edge");
 
         try {
             Thread.sleep(6000);

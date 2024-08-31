@@ -13,7 +13,7 @@ public class LoginTest {
 
     @BeforeSuite
     void initDriver() {
-        driver = new Browser().openBrowser(Browser.Browsers.EDGE);
+        driver = new Browser().openBrowser("edge");
     }
 
     @Test
