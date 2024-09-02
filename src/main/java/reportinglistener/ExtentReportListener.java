@@ -18,6 +18,19 @@ public class ExtentReportListener extends TestListenerAdapter {
         ExtentReporter htmlReporter = new ExtentHtmlReporter("test-output/ExtentReport.html");
         extentReports = new ExtentReports();
         extentReports.attachReporter(htmlReporter);
+        extentReports.setSystemInfo("Test Environment", "Dev");
+        extentReports.setSystemInfo("Java Version", System.getProperty("java.version"));
+        extentReports.setSystemInfo("Java Runtime Version", System.getProperty("java.runtime.version"));
+        extentReports.setSystemInfo("Java Specification Version", System.getProperty("java.specification.version"));
+        extentReports.setSystemInfo("Java Class Version", System.getProperty("java.class.version"));
+        extentReports.setSystemInfo("Operating System Name", System.getProperty("os.name"));
+        extentReports.setSystemInfo("Operating System Version", System.getProperty("os.version"));
+        extentReports.setSystemInfo("Operating System Architecture", System.getProperty("os.arch"));
+        extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
+        extentReports.setSystemInfo("User Directory", System.getProperty("user.dir"));
+        extentReports.setSystemInfo("User Country", System.getProperty("user.country"));
+        extentReports.setSystemInfo("User Language", System.getProperty("user.language"));
+        extentReports.setSystemInfo("User Timezone", System.getProperty("user.timezone"));
     }
 
     @Override

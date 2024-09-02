@@ -141,7 +141,7 @@ public class ShawnFrost {
         List<List<String>> changedTable = findTheChangedCell.getTableData();
 
         for (int i = 0; i < originalTable.size(); i++) {
-            for (int j = 0; j < originalTable.size(); j++) {
+            for (int j = 0; j < originalTable.get(0).size(); j++) {
                 String originalStr = originalTable.get(i).get(j);
                 String changedStr = changedTable.get(i).get(j);
                 if (!originalStr.equals(changedStr)) {
@@ -149,6 +149,7 @@ public class ShawnFrost {
                     findTheChangedCell.enterColumnNumber(j + 1);
                     findTheChangedCell.enterOriginalValue(originalStr);
                     findTheChangedCell.enterChangedValue(changedStr);
+                    break;
                 }
             }
         }
@@ -325,6 +326,7 @@ public class ShawnFrost {
         String key = keyTextBox.getText().trim();
         String attribute = attributeTextBox.getText().trim();
 
+        staticWait(3);
         // Steps to get the value from TDS (Tricentis Test Data Service)
         String tdsUri = "https://tdsservice.azurewebsites.net";
         String repository = "data";
@@ -340,6 +342,7 @@ public class ShawnFrost {
                 .findFirst()
                 .orElse(null);
         String result = ((Map<String, Object>) r.get("data")).get(attribute).toString();
+        System.out.printf("key => %s\nattribute => %s\nresult => %s", key, attribute, result);
 
         WebElement resultTextBox = driver.findElement(By.id("result"));
         resultTextBox.sendKeys(result);
@@ -350,6 +353,7 @@ public class ShawnFrost {
 
     @AfterSuite
     void tearDownSession() {
-        driver.quit();
+        if (driver != null)
+            driver.quit();
     }
 }
