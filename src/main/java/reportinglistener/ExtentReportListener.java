@@ -8,6 +8,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
+import org.testng.annotations.Test;
 
 public class ExtentReportListener extends TestListenerAdapter {
     private ExtentReports extentReports;
@@ -40,7 +41,12 @@ public class ExtentReportListener extends TestListenerAdapter {
 
     @Override
     public void onTestStart(ITestResult result) {
-        extentTest = extentReports.createTest(result.getMethod().getMethodName());
+        String testName = result.getMethod().getConstructorOrMethod()
+                .getMethod().getDeclaredAnnotation(Test.class)
+                .testName();
+        if (testName.isEmpty())
+            testName = result.getMethod().getMethodName();
+        extentTest = extentReports.createTest(testName);
     }
 
     @Override
