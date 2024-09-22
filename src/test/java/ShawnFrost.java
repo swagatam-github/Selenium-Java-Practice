@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
@@ -151,6 +153,47 @@ public class ShawnFrost {
                     findTheChangedCell.enterChangedValue(changedStr);
                     break;
                 }
+            }
+        }
+
+        findTheChangedCell.clickSubmit();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Find The Changed Cell Using Inner HTML")
+    void FindTheChangedCellUsingInnerHTML() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/73591");
+        FindTheChangedCell findTheChangedCell = new FindTheChangedCell(driver);
+
+        Function<WebElement, HashMap<String, String>> extractTableData = (WebElement tableElement) -> {
+            String tableHTML = tableElement.getAttribute("innerHTML");
+            List<String> cells = regexMultiTextExtractor(tableHTML, "<td id=\"\\d+_\\d+\">[\\w|\\d]{4}<\\/td>");
+            HashMap<String, String> tableDataMap = new HashMap<>();
+            for (String cell : cells) {
+                Matcher matcher = regexExtractor(cell, "<td id=\"(?<key>\\d+_\\d+)\">(?<cell>[\\w|\\d]{4})<\\/td>");
+                tableDataMap.put(matcher.group("key"), matcher.group("cell"));
+            }
+            return tableDataMap;
+        };
+
+        WebElement table = driver.findElement(By.xpath("//div[@id='tableContent']"));
+        HashMap<String, String> originalTableData = extractTableData.apply(table);
+        findTheChangedCell.clickChangeTableButton();
+        HashMap<String, String> newTableData = extractTableData.apply(table);
+
+        for (String key : originalTableData.keySet()) {
+            String originalData = originalTableData.get(key);
+            String newData = newTableData.get(key);
+
+            if (!originalData.equals(newData)) {
+                System.out.println("New Implementation");
+                String[] rowCol = key.split("_");
+                System.out.printf("Row: %s\nCol: %s\nActual Value: %s\nExpected Value: %s%n",
+                        rowCol[0], rowCol[1], originalData, newData);
+                findTheChangedCell.enterRowNumber(rowCol[0]);
+                findTheChangedCell.enterColumnNumber(rowCol[1]);
+                findTheChangedCell.enterOriginalValue(originalData);
+                findTheChangedCell.enterChangedValue(newData);
             }
         }
 
