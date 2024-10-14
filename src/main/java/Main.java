@@ -1,5 +1,5 @@
+import base.Browser;
 import org.openqa.selenium.WebDriver;
-import utils.Browser;
 
 public class Main {
     public static void main(String[] args) {

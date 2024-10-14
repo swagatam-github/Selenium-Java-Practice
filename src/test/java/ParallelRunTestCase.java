@@ -3,6 +3,7 @@ Add "Test runner params" mentioned below
         -parallel methods -threadcount 6
 */
 
+import base.Browser;
 import io.restassured.response.Response;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,7 +20,6 @@ import pages.obstacles.AndCounting;
 import pages.obstacles.FindTheChangedCell;
 import pages.obstacles.NotATable;
 import pages.obstacles.ToscaBotCanFly;
-import utils.Browser;
 import utils.XMLParser;
 
 import java.time.LocalDate;

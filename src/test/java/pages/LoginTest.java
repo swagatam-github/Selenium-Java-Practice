@@ -1,11 +1,11 @@
 package pages;
 
+import base.Browser;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.login.LoginPage;
-import utils.Browser;
 import utils.Credentials;
 
 public class LoginTest {

@@ -1,3 +1,5 @@
+import base.Browser;
+import base.DesktopBrowserType;
 import io.restassured.response.Response;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,7 +14,6 @@ import pages.obstacles.AndCounting;
 import pages.obstacles.FindTheChangedCell;
 import pages.obstacles.NotATable;
 import pages.obstacles.ToscaBotCanFly;
-import utils.Browser;
 import utils.XMLParser;
 
 import java.time.LocalDate;
@@ -35,7 +36,7 @@ public class ShawnFrost {
 
     @BeforeSuite
     void initObstaclePage() {
-        driver = new Browser().openBrowser("edge");
+        driver = new Browser().openBrowser(DesktopBrowserType.EDGE);
     }
 
     @Test(testName = "Not a table")
