@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
@@ -26,6 +27,9 @@ public class Browser {
                 break;
             case "edge_headless":
                 driver = openHeadlessEdge();
+                break;
+            case "firefox_headless":
+                driver = openHeadlessFirefox();
                 break;
             case "edge":
             default:
@@ -55,6 +59,12 @@ public class Browser {
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless=new");
         return new EdgeDriver(options);
+    }
+
+    private WebDriver openHeadlessFirefox() {
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("-headless");
+        return new FirefoxDriver(options);
     }
 
     private WebDriver openEdgeBrowser() {

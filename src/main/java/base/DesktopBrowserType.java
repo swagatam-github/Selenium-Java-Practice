@@ -6,4 +6,5 @@ public interface DesktopBrowserType {
     String FIREFOX = "firefox";
     String EDGE_HEADLESS = EDGE.concat("_headless");
     String CHROME_HEADLESS = CHROME.concat("_headless");
+    String FIREFOX_HEADLESS = FIREFOX.concat("_headless");
 }
