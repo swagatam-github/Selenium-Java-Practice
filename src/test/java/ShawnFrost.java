@@ -395,6 +395,26 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Scroll Into View")
+    void ScrollIntoView() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/99999");
+
+        WebElement frame = driver.findElement(By.id("container"));
+        driver.switchTo().frame(frame);
+
+        WebElement textBox = driver.findElement(By.id("textfield"));
+        scrollIntoView(driver, textBox);
+        staticWait(2);
+        Assert.assertTrue(textBox.isEnabled(), "Text box is not enabled");
+        textBox.sendKeys("Tosca");
+
+        driver.switchTo().defaultContent();
+
+        new Actions(driver).scrollByAmount(0, -500).build().perform();
+        driver.findElement(By.id("submit")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
