@@ -439,6 +439,17 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Lots Of Rows")
+    void LotsOfRows() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41032");
+        int countOfRows = driver.findElement(By.id("rowCountTable"))
+                .findElements(By.tagName("tr"))
+                .size();
+        driver.findElement(By.id("rowcount")).sendKeys(String.valueOf(countOfRows));
+        driver.findElement(By.id("sample")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
