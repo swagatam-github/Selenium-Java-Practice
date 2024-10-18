@@ -459,6 +459,14 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Table Search")
+    void TableSearch() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41036");
+        boolean cellIsPresent = driver.findElement(By.xpath("//table[@id='randomTable']/tr/td[text()='15']")).isDisplayed();
+        driver.findElement(By.id("resulttext")).sendKeys(cellIsPresent ? "True" : "False");
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
