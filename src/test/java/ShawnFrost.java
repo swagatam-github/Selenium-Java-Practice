@@ -462,7 +462,8 @@ public class ShawnFrost {
     @Test(testName = "Table Search")
     void TableSearch() {
         driver.get("https://obstaclecourse.tricentis.com/Obstacles/41036");
-        boolean cellIsPresent = driver.findElement(By.xpath("//table[@id='randomTable']/tr/td[text()='15']")).isDisplayed();
+        boolean cellIsPresent = driver.findElements(By.xpath("//table[@id='randomTable']/tr/td"))
+                .stream().anyMatch(cell -> cell.getText().equals("15"));
         driver.findElement(By.id("resulttext")).sendKeys(cellIsPresent ? "True" : "False");
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
