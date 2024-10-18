@@ -450,6 +450,15 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "The Last Row")
+    void TheLastRow() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/70310");
+        List<WebElement> amounts = driver.findElements(By.xpath("//table[@id='orderTable']//tr[td[1][text()='Order Value']]/td[2]"));
+        String amount = amounts.get(amounts.size() - 1).getText();
+        driver.findElement(By.id("ordervalue")).sendKeys(amount);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
