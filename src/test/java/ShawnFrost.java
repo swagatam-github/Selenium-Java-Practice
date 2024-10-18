@@ -467,6 +467,23 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Meeting Scheduler")
+    void MeetingScheduler() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41037");
+
+        WebElement timeTable = driver.findElement(By.id("timeTable"));
+        WebElement headerCell = timeTable.findElement(By.xpath("//th[text()='Thursday']"));
+        WebElement timeSlot = timeTable.findElement(By.xpath("//tr[td[1][text()='11:00 - 13:00']]"));
+
+        int cellIndex = Integer.parseInt(headerCell.getAttribute("cellIndex"));
+        String roomStatus = timeSlot.findElement(By.xpath(String.format("./td[%d]", cellIndex + 1))).getText();
+        //String roomStatus = timeSlot.findElement(By.xpath("./td[" + (cellIndex + 1) + "]")).getText();
+
+        driver.findElement(By.id("resulttext")).sendKeys(roomStatus);
+
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
