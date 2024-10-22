@@ -569,6 +569,16 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Two Times")
+    void TwoTimes() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/72954");
+        new Actions(driver)
+                .doubleClick(driver.findElement(By.partialLinkText("Click me".toUpperCase())))
+                .build()
+                .perform();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
