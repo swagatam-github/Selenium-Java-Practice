@@ -492,6 +492,17 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "The Obvious")
+    void TheObvious() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/73588");
+        driver.findElement(By.id("clickme")).click();
+        String randomText = driver.findElement(By.id("randomtext")).getAttribute("value").trim();
+        Select options = new Select(driver.findElement(By.id("selectlink")));
+        options.selectByVisibleText(randomText);
+        driver.findElement(By.id("submitanswer")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
