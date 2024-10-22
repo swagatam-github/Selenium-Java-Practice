@@ -6,7 +6,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.common.GoodJob;
@@ -16,6 +18,7 @@ import pages.obstacles.NotATable;
 import pages.obstacles.ToscaBotCanFly;
 import utils.XMLParser;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -576,6 +579,20 @@ public class ShawnFrost {
                 .doubleClick(driver.findElement(By.partialLinkText("Click me".toUpperCase())))
                 .build()
                 .perform();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
+    @Test(testName = "Wait A Moment")
+    void WaitAMoment() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/33678");
+
+        driver.findElement(By.id("one")).click();
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        webDriverWait.until(ExpectedConditions.textToBe(By.id("label"), "100%"));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("two")))
+                .click();
+
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
