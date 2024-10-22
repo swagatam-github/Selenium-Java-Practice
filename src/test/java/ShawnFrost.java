@@ -524,6 +524,20 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Confusing Dates")
+    void ConfusingDates() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/57683");
+        driver.findElement(By.id("generate")).click();
+        String generatedDate = driver.findElement(By.id("dateGenerated")).getAttribute("value");
+        String dateSolution = LocalDate.parse(generatedDate, DateTimeFormatter.ofPattern("M/d/yyyy"))
+                .plusMonths(2)
+                .withDayOfMonth(1)
+                .format(DateTimeFormatter.ISO_LOCAL_DATE);
+        driver.findElement(By.id("dateSolution")).sendKeys(dateSolution);
+        driver.findElement(By.id("done")).click();
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
