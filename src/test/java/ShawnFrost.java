@@ -538,6 +538,22 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Popup Windows")
+    void PopupWindows() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/51130");
+        driver.findElement(By.id("button")).click();
+        String mainWindowHandle = driver.getWindowHandle();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if (!windowHandle.equals(mainWindowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+        driver.close();
+        driver.switchTo().window(mainWindowHandle);
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
