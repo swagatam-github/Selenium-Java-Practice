@@ -485,6 +485,13 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Escape")
+    void Escape() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/41041");
+        driver.findElement(By.id("resulttext")).sendKeys("{Click}");
+        Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
