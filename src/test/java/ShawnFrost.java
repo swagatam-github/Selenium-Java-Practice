@@ -596,6 +596,12 @@ public class ShawnFrost {
         Assert.assertTrue(new GoodJob(driver).isSuccessMessageShowed(), "Problem Not Solved");
     }
 
+    @Test(testName = "Get Sue's Number", enabled = false)
+    void GetSuesNumber() {
+        driver.get("https://obstaclecourse.tricentis.com/Obstacles/72946");
+        //TODO: Using Download path
+    }
+
     @AfterSuite
     void tearDownSession() {
         if (driver != null)
