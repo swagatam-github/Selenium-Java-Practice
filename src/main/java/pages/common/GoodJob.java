@@ -4,8 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static utils.ElementOperations.staticWait;
+import java.time.Duration;
 
 public class GoodJob extends PageFactory {
     WebDriver driver;
@@ -19,9 +21,10 @@ public class GoodJob extends PageFactory {
     }
 
     public boolean isSuccessMessageShowed() {
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
-            staticWait(5);
-            return successPopUp.isDisplayed();
+            return webDriverWait.until(ExpectedConditions.visibilityOf(successPopUp))
+                    .isDisplayed();
         } catch (Exception e) {
             return false;
         }
