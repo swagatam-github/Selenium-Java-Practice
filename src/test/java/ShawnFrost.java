@@ -602,7 +602,7 @@ public class ShawnFrost {
         //TODO: Using Download path
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     void tearDownSession() {
         if (driver != null)
             driver.quit();
