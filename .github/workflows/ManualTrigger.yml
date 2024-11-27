@@ -42,6 +42,7 @@ jobs:
 
       # Upload multiple Extent HTML reports as artifacts
       - name: Upload all Extent HTML reports
+        if: failure() || success()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
