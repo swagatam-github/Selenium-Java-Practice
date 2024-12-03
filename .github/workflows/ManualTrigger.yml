@@ -2,6 +2,16 @@ name: CI/CD Workflow for Java Tests
 
 on:
   workflow_dispatch:
+    inputs:
+      runs_on:
+        required: true
+        default: windows-latest
+        description: Select virtual machine in which test will be run
+        type: choice
+        options:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
 
 # Git trigger
 #on:
@@ -13,8 +23,7 @@ on:
 jobs:
   test:
 
-    runs-on: windows-latest
-#    ubuntu-latest
+    runs-on: ${{github.event.inputs.runs_on}}
 
     steps:
       # You may pin to the exact commit or the version.
