@@ -52,12 +52,16 @@ public class Browser {
     private WebDriver openHeadlessChrome() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-gpu");
         return new ChromeDriver(options);
     }
 
     private WebDriver openHeadlessEdge() {
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless=new");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-gpu");
         return new EdgeDriver(options);
     }
 
